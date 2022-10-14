@@ -3,13 +3,14 @@ import pickle
 from pymongo import MongoClient
 import config
 from dotenv import load_dotenv
+import os
 
 database = config.DATABASE
 
 
 
 load_dotenv()  # use dotenv to hide sensitive credential as environment variables
-DATABASE_URL = f'mongodb+srv://JR-Test:<password>@cluster0.5uasnpw.mongodb.net/?retryWrites=true&w=majority'
+DATABASE_URL = f'mongodb+srv://JR-Test:{os.environ.get("password")}'/'@cluster0.5uasnpw.mongodb.net/database?'/'retryWrites=true&w=majority'
 
 mongo_db_client = MongoClient(DATABASE_URL)
 

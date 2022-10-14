@@ -42,15 +42,12 @@ def register_validation():
 
 
 
-#############################################################################################
-########################## Login Api #####################################################
-#############################################################################################
 
 
+# Login-Validation
 @app.route('/login_validation',methods=['GET','POST'])
 def login_validation():
     data=request.form
-    print(data)
 
     response=project_db.login_user(data)
 
@@ -61,21 +58,24 @@ def login_validation():
 
 
 
-#############################################################################################
-########################## Prediction Api #####################################################
-#############################################################################################
 
 
+
+# Prediction Api
 @app.route('/prediction' ,methods=['POST'])
 def prediction():
     data=request.form
-    print(data)
 
     prediction_text=houseprediction.prediction_price(data)
 
     prediction_text=np.round(prediction_text)
 
-    return render_template('home.html',prediction_text="Predicted Price is Rs : [{}]".format(prediction_text))
+    if prediction_text >= 0:
+
+        return render_template('home.html',prediction_text="Predicted Price is Rs : {}Lakh".format(prediction_text))
+    else:
+        return redirect("/home")
+
 
 
 

@@ -14,7 +14,7 @@ DATABASE_URL = f'mongodb+srv://JR-Test:{os.environ.get("password")}'/'@cluster0.
 
 mongo_db_client = MongoClient(DATABASE_URL)
 
-db = mongo_db_client[database]
+db = mongo_db_client.database
 
 collection_user = db['user_details']
 
